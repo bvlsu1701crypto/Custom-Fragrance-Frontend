@@ -242,6 +242,7 @@ function generateRecommendation(
       zh: "这款香氛以清新的柠檬和香柠檬开场，带来一丝活力与清爽。随着时间推移，优雅的鸢尾与茉莉在中调绽放，散发出细腻的花香气息，同时桦木带来一抹清冷的木质感。基调由温暖的香草与焦糖构成，甜美却不腻人，雪松则为整体增添了沉稳与持久的余韵。这是一款适合日常穿戴的香氛，既清新又温暖，充满层次感。",
       en: "This fragrance opens with a burst of fresh lemon and bergamot, delivering an invigorating and refreshing top note. As time unfolds, elegant iris and jasmine bloom in the heart, exuding a delicate floral essence, while birch adds a cool, woody undertone. The base is composed of warm vanilla and caramel—sweet yet not cloying—while cedar provides depth and a lasting, grounded finish. This is a versatile scent perfect for everyday wear, balancing freshness with warmth and layered sophistication."
     },
+    similar_perfume: null,
   }
 }
 

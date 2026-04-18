@@ -113,6 +113,50 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
         </div>
       </section>
 
+      {/* Similar Perfume Recommendation */}
+      {result.similar_perfume && (
+        <section className="border border-border bg-card p-8 md:p-10">
+          <h3 className="mb-8 text-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            {language === "zh" ? "相似推荐 · Similar Recommendation" : "Similar Recommendation"}
+          </h3>
+          <div className="mx-auto max-w-2xl">
+            <div className="mb-6 text-center">
+              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                {result.similar_perfume.brand}
+              </p>
+              <p className="mt-1 font-serif text-2xl tracking-tight">
+                {result.similar_perfume.name}
+              </p>
+            </div>
+            <div className="mb-6 grid gap-4 md:grid-cols-3">
+              <div className="text-center">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  {language === "zh" ? "前调" : "Top Notes"}
+                </p>
+                <p className="font-serif text-sm">{result.similar_perfume.top_notes}</p>
+              </div>
+              <div className="text-center">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  {language === "zh" ? "中调" : "Middle Notes"}
+                </p>
+                <p className="font-serif text-sm">{result.similar_perfume.middle_notes}</p>
+              </div>
+              <div className="text-center">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  {language === "zh" ? "后调" : "Base Notes"}
+                </p>
+                <p className="font-serif text-sm">{result.similar_perfume.base_notes}</p>
+              </div>
+            </div>
+            <div className="border-t border-border pt-6 text-center">
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {result.similar_perfume.reason}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Fragrance Description - NEW */}
       <section className="mx-auto max-w-3xl text-center">
         <div className="mb-6 flex items-center justify-center gap-4">
@@ -252,55 +296,6 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
           </div>
         )}
       </section>
-
-      {/* Similar Perfume Recommendation */}
-      {result.similar_perfume && (
-        <section className="border border-border bg-card p-8 md:p-10">
-          <h3 className="mb-8 text-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            {language === "zh" ? "相似推荐 · Similar Recommendation" : "Similar Recommendation"}
-          </h3>
-          <div className="mx-auto max-w-2xl">
-            {/* Brand & Name */}
-            <div className="mb-6 text-center">
-              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                {result.similar_perfume.brand}
-              </p>
-              <p className="mt-1 font-serif text-2xl tracking-tight">
-                {result.similar_perfume.name}
-              </p>
-            </div>
-
-            {/* Notes */}
-            <div className="mb-6 grid gap-4 md:grid-cols-3">
-              <div className="text-center">
-                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {language === "zh" ? "前调" : "Top Notes"}
-                </p>
-                <p className="font-serif text-sm">{result.similar_perfume.top_notes}</p>
-              </div>
-              <div className="text-center">
-                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {language === "zh" ? "中调" : "Middle Notes"}
-                </p>
-                <p className="font-serif text-sm">{result.similar_perfume.middle_notes}</p>
-              </div>
-              <div className="text-center">
-                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {language === "zh" ? "后调" : "Base Notes"}
-                </p>
-                <p className="font-serif text-sm">{result.similar_perfume.base_notes}</p>
-              </div>
-            </div>
-
-            {/* Reason */}
-            <div className="border-t border-border pt-6 text-center">
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {result.similar_perfume.reason}
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Share Card */}
       <ShareCard result={result} />
