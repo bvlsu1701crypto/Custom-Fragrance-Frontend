@@ -19,7 +19,7 @@ import {
   SEASONS,
 } from "@/lib/types"
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://custom-fragrance.onrender.com"
 
 // ── Value maps: frontend ID → backend Chinese literal ──────────
 
