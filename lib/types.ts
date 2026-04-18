@@ -44,6 +44,16 @@ export interface RecommendationOutput {
   analysis_summary: string
   fragrance_notes: FragranceNotes
   fragrance_description: FragranceDescription
+  similar_perfume: SimilarPerfume | null
+}
+
+export interface SimilarPerfume {
+  brand: string
+  name: string
+  top_notes: string
+  middle_notes: string
+  base_notes: string
+  reason: string
 }
 
 export const SCENT_FAMILIES = [

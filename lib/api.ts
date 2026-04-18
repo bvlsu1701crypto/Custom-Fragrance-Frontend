@@ -164,6 +164,15 @@ interface FormulaNote {
   ingredient_id: number | null
 }
 
+interface SimilarPerfume {
+  brand: string
+  name: string
+  top_notes: string
+  middle_notes: string
+  base_notes: string
+  reason: string
+}
+
 interface FinalOutput {
   formula: {
     top_notes: FormulaNote[]
@@ -175,6 +184,7 @@ interface FinalOutput {
   volume_ml: number
   estimated_longevity_hours: number
   concentration_percentage: number
+  similar_perfume: SimilarPerfume | null
 }
 
 // ── Main API function ──────────────────────────────────────────
@@ -268,5 +278,6 @@ export async function generatePerfumeViaAPI(
       zh: data.scent_description,
       en: data.scent_description,
     },
+    similar_perfume: data.similar_perfume ?? null,
   }
 }
