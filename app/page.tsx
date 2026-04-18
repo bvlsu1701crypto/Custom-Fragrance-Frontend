@@ -260,7 +260,7 @@ export default function Home() {
     if (currentStep === 2) {
       setIsGenerating(true)
       try {
-        const recommendation = await generatePerfumeViaAPI(preferences, biometrics, environment)
+        const recommendation = await generatePerfumeViaAPI(preferences, biometrics, environment, language)
         setResult(recommendation)
         setCurrentStep(3)
       } catch (error) {

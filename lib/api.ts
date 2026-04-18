@@ -182,12 +182,14 @@ interface FinalOutput {
 export async function generatePerfumeViaAPI(
   preferences: UserPreferences,
   biometrics: BiometricData,
-  environment: EnvironmentData
+  environment: EnvironmentData,
+  language: "zh" | "en" = "zh"
 ): Promise<RecommendationOutput> {
   const [lat, lng] = CITY_COORDS[environment.city] ?? [31.2304, 121.4737]
 
   const body = {
     user_text: preferences.free_description || "",
+    language,
     watch_data: {
       body_temperature: biometrics.body_temperature,
       latitude: lat,
