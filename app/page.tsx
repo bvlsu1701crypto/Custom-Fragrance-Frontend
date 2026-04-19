@@ -129,28 +129,29 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
               
-              {/* Floating text overlay - bottom right */}
-              <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
-                <div className="text-right">
-                  <p className="mb-4 text-xs uppercase tracking-[0.4em] text-foreground/80">
+              {/* Floating text overlay - top center */}
+              <div className="absolute left-0 right-0 top-6 md:top-10">
+                <div className="text-center">
+                  <p className="mb-3 text-xs uppercase tracking-[0.4em] text-foreground/80">
                     {t.heroSubtitle}
                   </p>
-                  <h1 className="font-serif text-5xl tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+                  <h1 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                     {t.heroTitle}
                     <br />
                     <span className="italic">{t.heroTitleLine2}</span>
                   </h1>
-                  <button
-                    onClick={() =>
-                      document.getElementById("journey-start")?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    aria-label="Skip to start"
-                    className="mt-6 inline-flex animate-bounce items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
-                  >
-                    <ArrowDown className="h-6 w-6" />
-                  </button>
                 </div>
               </div>
+              {/* Scroll arrow - bottom right */}
+              <button
+                onClick={() =>
+                  document.getElementById("journey-start")?.scrollIntoView({ behavior: "smooth" })
+                }
+                aria-label="Skip to start"
+                className="absolute bottom-6 right-6 inline-flex animate-bounce items-center justify-center text-foreground/60 transition-colors hover:text-foreground md:bottom-10 md:right-10"
+              >
+                <ArrowDown className="h-6 w-6" />
+              </button>
             </div>
 
             {/* Philosophy section */}
