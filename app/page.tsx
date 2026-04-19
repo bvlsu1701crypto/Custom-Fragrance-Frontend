@@ -71,6 +71,7 @@ export default function Home() {
         const { recommendation, raw } = await generatePerfume(preferences, biometrics, environment, language)
         setRecommendation(recommendation, raw, { preferences, biometrics, environment })
         setCurrentStep(3)
+        window.scrollTo({ top: 0, behavior: "smooth" })
       } catch (err) {
         const message =
           err instanceof ApiError
@@ -84,11 +85,13 @@ export default function Home() {
       }
     } else {
       setCurrentStep((prev) => Math.min(prev + 1, STEPS.length - 1))
+      window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }
 
   const handleBack = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0))
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleReset = () => {
@@ -97,6 +100,7 @@ export default function Home() {
     setBiometrics(initialBiometrics)
     setEnvironment(initialEnvironment)
     clear()
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const isNextDisabled = () => {
