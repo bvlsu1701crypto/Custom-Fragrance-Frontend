@@ -59,8 +59,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              <span className="block text-xs uppercase tracking-[0.15em]">{occasion.nameZh}</span>
-              <span className="mt-1 block text-sm">{occasion.name}</span>
+              {language === "zh" ? (
+                <>
+                  <span className="block text-xs uppercase tracking-[0.15em]">{occasion.nameZh}</span>
+                  <span className="mt-1 block text-sm">{occasion.name}</span>
+                </>
+              ) : (
+                <span className="block text-sm">{occasion.name}</span>
+              )}
             </button>
           ))}
         </div>
@@ -89,8 +95,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              <span className="block font-serif text-lg">{scent.nameZh}</span>
-              <span className="block text-xs uppercase tracking-wider">{scent.name}</span>
+              {language === "zh" ? (
+                <>
+                  <span className="block font-serif text-lg">{scent.nameZh}</span>
+                  <span className="block text-xs uppercase tracking-wider">{scent.name}</span>
+                </>
+              ) : (
+                <span className="block text-sm">{scent.name}</span>
+              )}
             </button>
           ))}
         </div>
@@ -119,7 +131,7 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-destructive/50"
               )}
             >
-              <span className="text-sm">{scent.nameZh} {scent.name}</span>
+              <span className="text-sm">{language === "zh" ? `${scent.nameZh} ${scent.name}` : scent.name}</span>
             </button>
           ))}
         </div>
@@ -146,8 +158,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 )}
               >
-                <span className="text-sm">{option.nameZh}</span>
-                <span className="text-xs">{option.name}</span>
+                {language === "zh" ? (
+                  <>
+                    <span className="text-sm">{option.nameZh}</span>
+                    <span className="text-xs">{option.name}</span>
+                  </>
+                ) : (
+                  <span className="text-sm">{option.name}</span>
+                )}
               </button>
             ))}
           </div>
@@ -172,8 +190,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 )}
               >
-                <span className="text-sm">{option.nameZh}</span>
-                <span className="text-xs">{option.name}</span>
+                {language === "zh" ? (
+                  <>
+                    <span className="text-sm">{option.nameZh}</span>
+                    <span className="text-xs">{option.name}</span>
+                  </>
+                ) : (
+                  <span className="text-sm">{option.name}</span>
+                )}
               </button>
             ))}
           </div>
@@ -200,8 +224,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              <span className="block font-serif text-lg">{option.nameZh}</span>
-              <span className="mt-1 block text-xs uppercase tracking-wider">{option.name}</span>
+              {language === "zh" ? (
+                <>
+                  <span className="block font-serif text-lg">{option.nameZh}</span>
+                  <span className="mt-1 block text-xs uppercase tracking-wider">{option.name}</span>
+                </>
+              ) : (
+                <span className="block text-sm">{option.name}</span>
+              )}
             </button>
           ))}
         </div>

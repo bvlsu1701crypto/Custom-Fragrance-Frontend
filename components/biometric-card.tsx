@@ -101,8 +101,14 @@ export function BiometricCard({ data, onChange }: BiometricCardProps) {
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 )}
               >
-                <span className="block text-xs uppercase tracking-[0.15em]">{level.nameZh}</span>
-                <span className="mt-1 block text-sm">{level.name}</span>
+                {language === "zh" ? (
+                  <>
+                    <span className="block text-xs uppercase tracking-[0.15em]">{level.nameZh}</span>
+                    <span className="mt-1 block text-sm">{level.name}</span>
+                  </>
+                ) : (
+                  <span className="block text-sm">{level.name}</span>
+                )}
               </button>
             ))}
           </div>
