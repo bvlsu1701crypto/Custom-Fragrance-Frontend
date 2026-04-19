@@ -22,7 +22,7 @@ import { fromFinalOutput } from "@/lib/api/adapter"
 import { ApiError } from "@/lib/api/schemas"
 import { useRecommendation } from "@/lib/recommendation-context"
 import { toast } from "sonner"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react"
 
 const STEPS_ZH = ["偏好", "生理", "环境", "结果"]
 const STEPS_EN = ["Preferences", "Biometrics", "Environment", "Results"]
@@ -125,9 +125,9 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
               
-              {/* Floating text overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
+              {/* Floating text overlay - bottom right */}
+              <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
+                <div className="text-right">
                   <p className="mb-4 text-xs uppercase tracking-[0.4em] text-foreground/80">
                     {t.heroSubtitle}
                   </p>
@@ -136,6 +136,15 @@ export default function Home() {
                     <br />
                     <span className="italic">{t.heroTitleLine2}</span>
                   </h1>
+                  <button
+                    onClick={() =>
+                      document.getElementById("journey-start")?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    aria-label="Skip to start"
+                    className="mt-6 inline-flex animate-bounce items-center justify-center text-foreground/60 transition-colors hover:text-foreground"
+                  >
+                    <ArrowDown className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -185,7 +194,7 @@ export default function Home() {
             </div>
 
             {/* Begin journey prompt */}
-            <div className="text-center">
+            <div className="text-center" id="journey-start">
               <p className="mb-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 {t.beginJourney}
               </p>
