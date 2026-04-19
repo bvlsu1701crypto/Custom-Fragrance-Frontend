@@ -10,6 +10,27 @@ interface BiometricCardProps {
   onChange: (data: BiometricData) => void
 }
 
+// 活动强度 → 体温/心率范围（模拟 Apple Watch 监测）
+const BIOMETRIC_RANGES: Record<string, { temp: [number, number]; hr: [number, number] }> = {
+  resting:  { temp: [36.3, 36.7], hr: [60, 75] },
+  light:    { temp: [36.5, 36.9], hr: [75, 100] },
+  moderate: { temp: [36.7, 37.2], hr: [100, 140] },
+  intense:  { temp: [37.0, 37.5], hr: [140, 175] },
+}
+
+function randomInRange([min, max]: [number, number], decimals = 0): number {
+  const v = Math.random() * (max - min) + min
+  return decimals > 0 ? +v.toFixed(decimals) : Math.round(v)
+}
+
+function generateBiometrics(level: string): { body_temperature: number; heart_rate: number } {
+  const r = BIOMETRIC_RANGES[level] ?? BIOMETRIC_RANGES.resting
+  return {
+    body_temperature: randomInRange(r.temp, 1),
+    heart_rate: randomInRange(r.hr),
+  }
+}
+
 export function BiometricCard({ data, onChange }: BiometricCardProps) {
   const { language, t } = useLanguage()
 
@@ -93,7 +114,11 @@ export function BiometricCard({ data, onChange }: BiometricCardProps) {
             {ACTIVITY_LEVELS.map((level) => (
               <button
                 key={level.id}
-                onClick={() => onChange({ ...data, activity_level: level.id })}
+                onClick={() => onChange({
+                  ...data,
+                  activity_level: level.id,
+                  ...generateBiometrics(level.id),
+                })}
                 className={cn(
                   "group relative border px-5 py-4 text-left transition-all duration-300",
                   data.activity_level === level.id
