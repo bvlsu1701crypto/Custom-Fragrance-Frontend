@@ -15,8 +15,30 @@ interface RecommendationResultProps {
 export function RecommendationResult({ result }: RecommendationResultProps) {
   const { language, t } = useLanguage()
 
+  // 香调 → 背景图映射
+  const SCENT_BG_MAP: Record<string, string> = {
+    "柑橘调": "bg-citrus.jpg",
+    "花香调": "bg-floral.jpg",
+    "木质调": "bg-woody.jpg",
+    "东方调": "bg-oriental.jpg",
+    "水生调": "bg-fresh.jpg",
+    "草本调": "bg-herbal.jpg",
+    "辛辣调": "bg-spicy.jpg",
+    "美食调": "bg-sweet.jpg",
+    "麝香调": "bg-musky.jpg",
+    "皮革调": "bg-leather.jpg",
+  }
+
+  const primaryScent = result.scent_preference?.[0] ?? ""
+  const bgFile = SCENT_BG_MAP[primaryScent] ?? "bg-floral.jpg"
+  const bgImage = `/images/${bgFile}`
+
   return (
-    <div className="space-y-16">
+    <div className="relative space-y-16">
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat opacity-15"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      />
       {/* Hero Analysis */}
       <section className="relative">
         <div className="grid gap-8 lg:grid-cols-5">
