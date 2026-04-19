@@ -1,9 +1,12 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import type { RecommendationOutput } from "@/lib/types"
 import { useLanguage } from "@/lib/language-context"
 import { ShareCard } from "@/components/share-card"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
 interface RecommendationResultProps {
   result: RecommendationOutput
@@ -113,6 +116,29 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
         </div>
       </section>
 
+      {/* Similar Recommendations */}
+      {result.similar_perfumes.length > 0 && (
+        <section className="mx-auto max-w-4xl">
+          <div className="mb-8 flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-border" />
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              {language === "zh" ? "相似推荐 · Similar" : "Similar Fragrances"}
+            </span>
+            <div className="h-px w-12 bg-border" />
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {result.similar_perfumes.map((p, i) => (
+              <div key={i} className="border border-border bg-card p-6 text-center">
+                <p className="font-serif text-lg leading-tight">{p.name}</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.15em] text-muted-foreground">{p.brand}</p>
+                <div className="my-4 h-px w-8 mx-auto bg-border" />
+                <p className="text-sm leading-relaxed text-foreground/80">{p.reason}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Fragrance Description - NEW */}
       <section className="mx-auto max-w-3xl text-center">
         <div className="mb-6 flex items-center justify-center gap-4">
@@ -123,7 +149,9 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
           <div className="h-px w-12 bg-border" />
         </div>
         <p className="font-serif text-lg leading-relaxed text-foreground/90 md:text-xl">
-          {language === "zh" ? result.fragrance_description.zh : result.fragrance_description.en}
+          {language === "zh"
+            ? result.fragrance_description.zh
+            : (result.fragrance_description.en ?? result.fragrance_description.zh)}
         </p>
       </section>
 
@@ -140,20 +168,12 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
               <span className="font-serif text-lg">{result.occasion}</span>
             </div>
             <div className="flex items-baseline justify-between border-b border-border pb-4">
-              <span className="text-sm text-muted-foreground">{language === "zh" ? "持久度 Longevity" : "Longevity"}</span>
-              <span className="font-serif text-lg">{result.longevity}</span>
-            </div>
-            <div className="flex items-baseline justify-between border-b border-border pb-4">
               <span className="text-sm text-muted-foreground">{language === "zh" ? "扩散度 Projection" : "Projection"}</span>
               <span className="font-serif text-lg">{result.sillage}</span>
             </div>
             <div className="flex items-baseline justify-between border-b border-border pb-4">
               <span className="text-sm text-muted-foreground">{language === "zh" ? "浓度 Concentration" : "Concentration"}</span>
               <span className="font-serif text-lg">{result.concentration}</span>
-            </div>
-            <div className="flex items-baseline justify-between border-b border-border pb-4">
-              <span className="text-sm text-muted-foreground">{language === "zh" ? "预算 Budget" : "Budget"}</span>
-              <span className="font-serif text-lg">{result.budget_level}</span>
             </div>
             <div className="flex items-baseline justify-between pb-4">
               <span className="text-sm text-muted-foreground">{language === "zh" ? "时段 Time" : "Time of Day"}</span>
@@ -251,6 +271,19 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
             </div>
           </div>
         )}
+      </section>
+
+      {/* View Full Detail */}
+      <section className="flex justify-center">
+        <Link href="/detail">
+          <Button
+            variant="outline"
+            className="gap-2 border-foreground px-8 py-6 text-xs uppercase tracking-[0.2em] hover:bg-foreground hover:text-background"
+          >
+            {language === "zh" ? "查看完整配方详情" : "View Full Detail"}
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </section>
 
       {/* Share Card */}
