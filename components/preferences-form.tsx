@@ -5,10 +5,8 @@ import {
   type UserPreferences,
   SCENT_FAMILIES,
   OCCASIONS,
-  LONGEVITY_OPTIONS,
   SILLAGE_OPTIONS,
   CONCENTRATION_OPTIONS,
-  BUDGET_OPTIONS,
   TIME_OPTIONS,
 } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -21,31 +19,6 @@ interface PreferencesFormProps {
 
 export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
   const { language, t } = useLanguage()
-
-  const renderBilingualStack = (
-    english: string,
-    chinese: string,
-    variant: "card" | "compact" = "card"
-  ) => {
-    const primary = language === "en" ? english : chinese
-    const secondary = language === "en" ? chinese : english
-
-    if (variant === "compact") {
-      return (
-        <>
-          <span className="text-sm">{primary}</span>
-          <span className="text-xs opacity-70">{secondary}</span>
-        </>
-      )
-    }
-
-    return (
-      <>
-        <span className="block text-xs uppercase tracking-[0.15em]">{primary}</span>
-        <span className="mt-1 block text-sm">{secondary}</span>
-      </>
-    )
-  }
   
   const toggleScentPreference = (scentId: string) => {
     const newPreferences = data.scent_preference.includes(scentId)
@@ -60,6 +33,9 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
       : [...data.avoided_notes, scentId]
     onChange({ ...data, avoided_notes: newAvoided })
   }
+
+  const getName = (item: { name: string; nameZh: string }) => 
+    language === "zh" ? item.nameZh : item.name
 
   return (
     <div className="space-y-16">
@@ -83,7 +59,8 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              {renderBilingualStack(occasion.name, occasion.nameZh)}
+              <span className="block text-xs uppercase tracking-[0.15em]">{occasion.nameZh}</span>
+              <span className="mt-1 block text-sm">{occasion.name}</span>
             </button>
           ))}
         </div>
@@ -112,8 +89,8 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              <span className="block font-serif text-lg">{language === "en" ? scent.name : scent.nameZh}</span>
-              <span className="block text-xs uppercase tracking-wider">{language === "en" ? scent.nameZh : scent.name}</span>
+              <span className="block font-serif text-lg">{scent.nameZh}</span>
+              <span className="block text-xs uppercase tracking-wider">{scent.name}</span>
             </button>
           ))}
         </div>
@@ -142,41 +119,14 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-destructive/50"
               )}
             >
-              <span className="flex flex-col items-start">
-                {renderBilingualStack(scent.name, scent.nameZh, "compact")}
-              </span>
+              <span className="text-sm">{scent.nameZh} {scent.name}</span>
             </button>
           ))}
         </div>
       </section>
 
-      {/* Longevity & Sillage */}
+      {/* Sillage & Concentration */}
       <div className="grid gap-6 md:grid-cols-2">
-        <section className="border border-border bg-card p-8">
-          <div className="mb-6">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t.longevity}</span>
-            <h3 className="mt-2 font-serif text-xl tracking-tight">
-              {language === "zh" ? "需要持续多久？" : "How long?"}
-            </h3>
-          </div>
-          <div className="space-y-2">
-            {LONGEVITY_OPTIONS.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => onChange({ ...data, longevity: option.id })}
-                className={cn(
-                  "flex w-full items-center justify-between border px-4 py-3 transition-all duration-300",
-                  data.longevity === option.id
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
-                )}
-              >
-                {renderBilingualStack(option.name, option.nameZh, "compact")}
-              </button>
-            ))}
-          </div>
-        </section>
-
         <section className="border border-border bg-card p-8">
           <div className="mb-6">
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t.projection}</span>
@@ -196,15 +146,13 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 )}
               >
-                {renderBilingualStack(option.name, option.nameZh, "compact")}
+                <span className="text-sm">{option.nameZh}</span>
+                <span className="text-xs">{option.name}</span>
               </button>
             ))}
           </div>
         </section>
-      </div>
 
-      {/* Concentration & Budget */}
-      <div className="grid gap-6 md:grid-cols-2">
         <section className="border border-border bg-card p-8">
           <div className="mb-6">
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t.concentration}</span>
@@ -224,36 +172,8 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                     : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
                 )}
               >
-                {renderBilingualStack(option.name, option.nameZh, "compact")}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className="border border-border bg-card p-8">
-          <div className="mb-6">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t.budget}</span>
-            <h3 className="mt-2 font-serif text-xl tracking-tight">
-              {language === "zh" ? "预算范围" : "Investment level"}
-            </h3>
-          </div>
-          <div className="space-y-2">
-            {BUDGET_OPTIONS.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => onChange({ ...data, budget_level: option.id })}
-                className={cn(
-                  "flex w-full items-center justify-between border px-4 py-3 transition-all duration-300",
-                  data.budget_level === option.id
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
-                )}
-              >
-                <span className="flex flex-col items-start">
-                  <span className="text-sm">{language === "en" ? option.name : option.nameZh}</span>
-                  <span className="text-xs opacity-70">{language === "en" ? option.nameZh : option.range}</span>
-                </span>
-                {language === "en" ? <span className="text-xs opacity-60">{option.range}</span> : null}
+                <span className="text-sm">{option.nameZh}</span>
+                <span className="text-xs">{option.name}</span>
               </button>
             ))}
           </div>
@@ -280,8 +200,8 @@ export function PreferencesForm({ data, onChange }: PreferencesFormProps) {
                   : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
               )}
             >
-              <span className="block font-serif text-lg">{language === "en" ? option.name : option.nameZh}</span>
-              <span className="mt-1 block text-xs uppercase tracking-wider">{language === "en" ? option.nameZh : option.name}</span>
+              <span className="block font-serif text-lg">{option.nameZh}</span>
+              <span className="mt-1 block text-xs uppercase tracking-wider">{option.name}</span>
             </button>
           ))}
         </div>

@@ -5,18 +5,10 @@ import { useLanguage } from "@/lib/language-context"
 export function PhilosophySection() {
   const { language } = useLanguage()
 
-  const scrollToJourney = () => {
-    const target = document.getElementById("journey-start")
-    if (!target) return
-
-    target.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
-
   const content: Record<"zh" | "en", {
     intro: string
     introSub: string
     introHighlight: string
-    introCta: string
     quote: string
     section1Title: string
     section1Sub: string
@@ -75,7 +67,6 @@ export function PhilosophySection() {
       intro: "AI 调香师来了。",
       introSub: "但这一次，它不是在制造香水。",
       introHighlight: "它在理解你。",
-      introCta: "快速进入个人状况选择",
       quote: "「Smell is a word, perfume is literature.」",
       section1Title: "嗅觉，是一种语言。",
       section1Sub: "而香气，是你未说出口的那一部分。",
@@ -134,7 +125,6 @@ export function PhilosophySection() {
       intro: "The AI perfumer has arrived.",
       introSub: "But this time, it's not making perfume.",
       introHighlight: "It's understanding you.",
-      introCta: "Jump to your profile setup",
       quote: "「Smell is a word, perfume is literature.」",
       section1Title: "Scent is a language.",
       section1Sub: "And fragrance is the part of you left unspoken.",
@@ -200,14 +190,6 @@ export function PhilosophySection() {
         <p className="text-lg text-muted-foreground">{t.intro}</p>
         <p className="mt-1 text-lg text-muted-foreground">{t.introSub}</p>
         <p className="mt-6 font-serif text-3xl tracking-tight">{t.introHighlight}</p>
-        <button
-          type="button"
-          onClick={scrollToJourney}
-          className="mt-4 inline-flex items-center gap-2 border border-border bg-background px-4 py-2 text-sm text-foreground transition-colors hover:border-foreground"
-        >
-          <span className="text-xs uppercase tracking-[0.24em]">Go</span>
-          <span>{t.introCta}</span>
-        </button>
       </div>
 
       {/* Divider */}
