@@ -19,7 +19,7 @@ export function Header() {
         <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
           <a href="/" className="flex items-baseline gap-3">
             <span className="font-serif text-2xl tracking-wide">ScentMind</span>
-            <span className="text-xs tracking-[0.3em] text-muted-foreground">{language === "zh" ? "香气智能" : "Scent Intelligence"}</span>
+            <span className="text-xs tracking-[0.3em] text-muted-foreground">香气智能</span>
           </a>
           <nav className="hidden items-center gap-10 md:flex">
             <a href="#" className="text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground">
