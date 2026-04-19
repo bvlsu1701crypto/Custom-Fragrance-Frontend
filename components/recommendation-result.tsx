@@ -15,7 +15,7 @@ interface RecommendationResultProps {
 export function RecommendationResult({ result }: RecommendationResultProps) {
   const { language, t } = useLanguage()
 
-  // 香调 → 原料展示图映射
+  // 香调 → 原料展示图映射（支持中文、英文、ID 多种匹配）
   const SCENT_IMAGE_MAP: Record<string, string> = {
     "柑橘调": "bg-citrus.jpg",
     "花香调": "bg-floral.jpg",
@@ -27,6 +27,26 @@ export function RecommendationResult({ result }: RecommendationResultProps) {
     "美食调": "bg-sweet.jpg",
     "麝香调": "bg-musky.jpg",
     "皮革调": "bg-leather.jpg",
+    "Citrus": "bg-citrus.jpg",
+    "Floral": "bg-floral.jpg",
+    "Woody": "bg-woody.jpg",
+    "Oriental": "bg-oriental.jpg",
+    "Fresh/Aquatic": "bg-fresh.jpg",
+    "Herbal": "bg-herbal.jpg",
+    "Spicy": "bg-spicy.jpg",
+    "Sweet/Gourmand": "bg-sweet.jpg",
+    "Musky": "bg-musky.jpg",
+    "Leather": "bg-leather.jpg",
+    "citrus": "bg-citrus.jpg",
+    "floral": "bg-floral.jpg",
+    "woody": "bg-woody.jpg",
+    "oriental": "bg-oriental.jpg",
+    "fresh": "bg-fresh.jpg",
+    "herbal": "bg-herbal.jpg",
+    "spicy": "bg-spicy.jpg",
+    "sweet": "bg-sweet.jpg",
+    "musky": "bg-musky.jpg",
+    "leather": "bg-leather.jpg",
   }
 
   const primaryScent = result.scent_preference?.[0] ?? ""
