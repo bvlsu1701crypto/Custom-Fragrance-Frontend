@@ -129,9 +129,9 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
               
-              {/* Floating text overlay - top center */}
-              <div className="absolute left-0 right-0 top-6 md:top-10">
-                <div className="text-center">
+              {/* Floating text overlay - bottom right */}
+              <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
+                <div className="text-right">
                   <p className="mb-3 text-xs uppercase tracking-[0.4em] text-foreground/80">
                     {t.heroSubtitle}
                   </p>
@@ -142,13 +142,13 @@ export default function Home() {
                   </h1>
                 </div>
               </div>
-              {/* Scroll arrow - bottom right */}
+              {/* Scroll arrow - bottom left */}
               <button
                 onClick={() =>
                   document.getElementById("journey-start")?.scrollIntoView({ behavior: "smooth" })
                 }
                 aria-label="Skip to start"
-                className="absolute bottom-6 right-6 inline-flex animate-bounce items-center justify-center text-foreground/60 transition-colors hover:text-foreground md:bottom-10 md:right-10"
+                className="absolute bottom-8 left-8 inline-flex animate-bounce items-center justify-center rounded-full border-2 border-foreground/60 p-3 text-foreground/60 transition-colors hover:border-foreground hover:text-foreground md:bottom-12 md:left-12"
               >
                 <ArrowDown className="h-6 w-6" />
               </button>
