@@ -37,6 +37,42 @@ export function BiometricCard({ data, onChange }: BiometricCardProps) {
   return (
     <div className="border border-border bg-card p-8 md:p-10">
       <div className="space-y-12">
+        {/* Activity Level */}
+        <section>
+          <div className="mb-6">
+            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              {t.activityLevel}
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {ACTIVITY_LEVELS.map((level) => (
+              <button
+                key={level.id}
+                onClick={() => onChange({
+                  ...data,
+                  activity_level: level.id,
+                  ...generateBiometrics(level.id),
+                })}
+                className={cn(
+                  "group relative border px-5 py-4 text-left transition-all duration-300",
+                  data.activity_level === level.id
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                )}
+              >
+                {language === "zh" ? (
+                  <>
+                    <span className="block text-xs uppercase tracking-[0.15em]">{level.nameZh}</span>
+                    <span className="mt-1 block text-sm">{level.name}</span>
+                  </>
+                ) : (
+                  <span className="block text-sm">{level.name}</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </section>
+
         {/* Body Temperature */}
         <section>
           <div className="mb-6 flex items-baseline justify-between">
